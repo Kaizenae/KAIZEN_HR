@@ -1,8 +1,8 @@
 class AppStrings {
   static const String noRouteFound = 'Can not find the path';
   static const String empty = '';
-  static const String appName = 'KAIZEN HR';
-  static const String home = 'KAIZEN HR';
+  static const String appName = 'IDC HR';
+  static const String home = 'IDC HR';
   static const String employees = 'Employees';
   static const String attendance = 'Attendance';
   static const String name = 'Name';

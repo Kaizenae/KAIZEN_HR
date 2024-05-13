@@ -1,4 +1,4 @@
-package com.attendance.KAIZENHR
+package com.attendance.IDCHR
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

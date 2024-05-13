@@ -48,7 +48,7 @@ class HelpAndFeedbackScreen extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 3 / 1,
                       child: Image.asset(
-                        ImageAssets.homeIconImg,
+                        ImageAssets.logoImg,
                       ),
                     ),
                   ),
@@ -56,7 +56,7 @@ class HelpAndFeedbackScreen extends StatelessWidget {
                     height: AppSize.s30,
                   ),
                   Text(
-                    "PO Box: Dubai, Dubai, UAE.",
+                    "PO Box: 130652, Office 262, 2nd Floor WAFRA Square Building, Reem Island, Abu Dhabi, UAE.",
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(
@@ -64,10 +64,10 @@ class HelpAndFeedbackScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      await launchInBrowser(Uri.parse("tel:+971 56 682 8836"));
+                      await launchInBrowser(Uri.parse("tel:+971 2 3051500"));
                     },
                     child: Text(
-                      "Contact number : +971 56 682 8836",
+                      "Contact number : +971 2 3051500 ",
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             color: ColorManager.darkGrey,
                           ),
@@ -79,53 +79,25 @@ class HelpAndFeedbackScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () async {
                       await launchInBrowser(
-                          Uri.parse("mailto:sales@kaizenae.com"));
+                          Uri.parse("mailto:hr.helpdesk@ideacrate.net"));
                     },
                     child: Text(
-                      "Email : sales@kaizenae.com",
+                      "Email : hr.helpdesk@ideacrate.net",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   const SizedBox(
                     height: AppSize.s10,
                   ),
-                  Wrap(
-                    spacing: 16,
-                    children: [
-                      InkWell(
-                          onTap: () async {
-                            await launchInBrowser(
-                                Uri.parse("https://www.kaizenae.com"));
-                          },
-                          child: const Image(
-                            height: AppSize.s40 * 1.3,
-                            width: AppSize.s40 * 1.3,
-                            image: AssetImage(
-                              ImageAssets.webIcon,
-                            ),
-                          )),
-                      InkWell(
-                        onTap: () async {
-                          await launchInBrowser(Uri.parse(
-                              "https://www.instagram.com/kaizen_principles__?igsh=dnNuZW54bWo5cTdn"));
-                        },
-                        child: SvgPicture.asset(
-                          IconsAssets.instagramIcon,
-                          height: AppSize.s40 * 1.3,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await launchInBrowser(
-                              Uri.parse("https://wa.me/+971566828836"));
-                        },
-                        child: SvgPicture.asset(
-                          IconsAssets.whatsappIcon,
-                          height: AppSize.s40 * 1.3,
-                        ),
-                      ),
-                    ],
-                  ),
+                  InkWell(
+                      onTap: () async {
+                        await launchInBrowser(Uri.parse(
+                            "https://www.linkedin.com/company/ideacrateuae/mycompany/"));
+                      },
+                      child: SvgPicture.asset(
+                        IconsAssets.linkedinIcon,
+                        height: AppSize.s40 * 1.3,
+                      )),
                 ],
               ),
             ),

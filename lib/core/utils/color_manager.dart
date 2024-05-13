@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static const Color primary = Color(0xff1C2C5F);
-  static const Color secondary = Color(0xff1C2C5F);
+  static const Color primary = Color(0xff480e67);
+  static const Color secondary = Color(0xff480e67);
   static const Color skyColor = Color(0xff693484);
 
   static Color darkGrey = const Color(0xff525252);
@@ -16,7 +16,7 @@ class ColorManager {
   static Color grey2 = const Color(0xff797979);
   static const Color white = Color(0xffFFFFFF);
   static const Color scaffoldColor = Color(0xffF9F9F9);
-  static const Color error = Color(0xffC80A0A); // red color
+  static const Color error = Color(0xffff6c00); // red color
 
 // Text Form Field
   static Color textBackgroundColor = const Color(0xffEDEDED);
