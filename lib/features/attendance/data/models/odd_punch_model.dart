@@ -26,7 +26,7 @@ class ResponseModel {
   ResponseModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     employeeId = json["employee_id"];
-    checkIn = json["check_in"] == false ? "" : json["check_in"];
-    checkOut = json["check_out"] == false ? "" : json["check_out"];
+    checkIn = json["check_in"] == "" ? "" : json["check_in"];
+    checkOut = json["check_out"] == "" ? "" : json["check_out"];
   }
 }

@@ -100,7 +100,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
       data: {
         "jsonrpc": "2.0",
         "params": {
-          "user_id": CacheHelper.get(key: AppConstants.userId),
+          "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
           "photo": base64string,
         }
       },

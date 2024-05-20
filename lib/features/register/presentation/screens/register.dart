@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:Attendace/core/utils/font_manager.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/register/domain/usecases/register_usecase.dart';
 import 'package:Attendace/injection_container.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,15 +40,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: BlocConsumer<RegisterCubit, RegisterStates>(
           listener: (context, state) {
             if (state is RegisterSuccessState) {
-              SnackBar snackBar = SnackBar(
-                  content: Text(
-                      state.registerEntity.resultEntity.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.registerEntity.resultEntity.message.toString(),
+                  context: context));
               navigatorAndRemove(context, Routes.loginRoute);
             } else if (state is RegisterErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {

@@ -61,9 +61,9 @@ class ResponseModel extends ResponseEntity {
       holidayStatus: json['holiday_status'],
       holidayType: json['holiday_type'],
       state: json['state'],
-      start: json['Start'],
-      end: json['End'],
-      description: json['Description'],
+      start: json['start'],
+      end: json['end'],
+      description: json['description'],
       approvers: List<ApproversEntity>.from(
           json["approvers"].map((e) => ApproversModel.fromJson(e))));
 }

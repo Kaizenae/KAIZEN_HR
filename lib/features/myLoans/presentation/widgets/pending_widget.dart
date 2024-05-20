@@ -2,6 +2,7 @@
 
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/myLoans/presentation/controller/myLoans_state.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_request/accept_reject_request_cubit.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
@@ -24,13 +24,8 @@ class PendingWidget extends StatelessWidget {
     return BlocConsumer<MyLoansCubit, MyLoansState>(
       listener: (context, state) {
         if (state is CancelMyLoansSuccess) {
-          SnackBar snackBar = SnackBar(
-            content: const Text("Loan Canceled Successfuly"),
-            duration: Duration(
-              seconds: AppConstants.snackBarTime,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+              message: "Loan Canceled Successfuly", context: context));
         }
       },
       builder: (context, state) {

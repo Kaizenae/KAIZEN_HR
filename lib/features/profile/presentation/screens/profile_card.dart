@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
@@ -28,13 +28,8 @@ class ProfileCard extends StatelessWidget {
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is GetEmployeeError) {
-            SnackBar snackBar = SnackBar(
-              content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
             ProfileCubit.get(context).getEmployeeFun();
           }
           if (state is LogoutState) {

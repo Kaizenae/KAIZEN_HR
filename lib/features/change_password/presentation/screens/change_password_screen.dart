@@ -1,15 +1,14 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
+import '../../../../core/widgets/snack_bar/snack_bar_widget.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 import '../../../../injection_container.dart';
@@ -40,27 +39,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         body: BlocConsumer<ChangePasswordCubit, ChangePasswordStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message:
                     state.changePasswordEntity.resultEntity.message.toString()
-                      ..replaceAll(RegExp('"'), " ").toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      ..replaceAll(RegExp('"'), " ").toString(),
+                context: context,
+              ));
               Navigator.pop(context);
             } else if (state is ChangePasswordErrorState) {
-              if (kDebugMode) {
-                print(state.message);
-              }
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {

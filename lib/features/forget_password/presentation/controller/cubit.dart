@@ -92,8 +92,13 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
       }
     }).then((value) {
       de.log(value.data.toString());
-      emit(
-          ChangePasswordSuccessState(message: value.data["result"]["message"]));
+      if (value.data["result"]["success"] == true) {
+        emit(ChangePasswordSuccessState(
+            message: value.data["result"]["message"].toString()));
+      } else {
+        emit(ChangePasswordErrorState(
+            message: value.data["result"]["message"].toString()));
+      }
     }).catchError((error) {
       emit(ChangePasswordErrorState(
           message: AppStrings.someThingWentWrongTryAgainLater));

@@ -179,7 +179,7 @@ class AllAtendanceScreen extends StatelessWidget {
                                                           .resultEntity
                                                           .response[index]
                                                           .checkOut !=
-                                                      'false'
+                                                      ''
                                                   ? DateFormat('hh: mm a').format(
                                                       DateTime.tryParse(state
                                                               .attendanceEntity

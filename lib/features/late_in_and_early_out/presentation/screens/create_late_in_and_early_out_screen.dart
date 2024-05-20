@@ -1,6 +1,7 @@
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/widgets/elevated_button/elevated_button_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/core/widgets/text_custom/text_custom.dart';
 import 'package:Attendace/core/widgets/text_form_field/text_form_field_custom.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/cubit.dart';
@@ -38,25 +39,23 @@ class _CreateLateInEarlyOutScreenState
         child: BlocConsumer<EarlyOutLateInCubit, EarlyOutLateInStates>(
           listener: (context, state) {
             if (state is EarlyOutErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             } else if (state is EarlyOutSuccessState) {
               Navigator.pop(context);
               Navigator.pop(context);
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             } else if (state is LateInSuccessState) {
               Navigator.pop(context);
               Navigator.pop(context);
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             } else if (state is LateInErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {

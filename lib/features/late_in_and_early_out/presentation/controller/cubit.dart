@@ -163,6 +163,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       }
       emit(GetEarlyOutSuccessState());
     }).catchError((error) {
+      log(error.toString());
       emit(GetEarlyOutErrorState());
     });
   }

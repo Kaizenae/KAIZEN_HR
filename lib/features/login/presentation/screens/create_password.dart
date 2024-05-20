@@ -1,5 +1,6 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/component.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/login/presentation/cubit/login_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,13 +38,8 @@ class CreatePasswordAfterLoginScreen extends StatelessWidget {
         body: BlocConsumer<LoginCubit, LoginStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  snackBarWidget(message: state.message, context: context));
               CacheHelper.put(key: AppConstants.userId, value: userID);
 
               AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
@@ -57,13 +53,8 @@ class CreatePasswordAfterLoginScreen extends StatelessWidget {
                       ? Routes.mainRouteAdmin
                       : Routes.mainRoute);
             } else if (state is ChangePasswordErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  snackBarWidget(message: state.message, context: context));
             }
           },
           builder: (context, state) {

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../core/utils/assets_manager.dart';
@@ -35,14 +36,10 @@ class EditPhoneScreen extends StatelessWidget {
       body: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {
           if (state is EditProfileSuccessState) {
-            SnackBar snackBar = SnackBar(
-              content:
-                  Text(state.editProfileEntity.resultEntity.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message:
+                    state.editProfileEntity.resultEntity.message.toString(),
+                context: context));
             AppConstants.admin
                 ? navigatorAndRemove(context, Routes.mainRouteAdmin)
                 : navigatorAndRemove(context, Routes.mainRoute);
@@ -50,13 +47,9 @@ class EditPhoneScreen extends StatelessWidget {
             if (kDebugMode) {
               print(state.message);
             }
-            SnackBar snackBar = SnackBar(
-              content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
           }
         },
         builder: (context, state) {

@@ -31,8 +31,8 @@ class ResponseModel {
     name = json["name"];
     employeeId = json["employee_id"];
     state = json["state"];
-    from = json["From"];
-    to = json["To"];
+    from = json["from"];
+    to = json["to"];
     shiftScheme = ShiftSchemeModel.fromJson(json["shift_scheme"]);
   }
 }
@@ -46,7 +46,7 @@ class ShiftSchemeModel {
   ShiftSchemeModel.fromJson(Map<String, dynamic> json) {
     name = json["name"];
     type = json["type"];
-    form = json["From"];
-    to = json["To"];
+    form = json["from"];
+    to = json["to"];
   }
 }

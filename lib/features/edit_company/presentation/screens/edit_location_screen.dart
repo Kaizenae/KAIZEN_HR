@@ -1,6 +1,7 @@
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../core/utils/assets_manager.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/component.dart';
@@ -34,26 +34,18 @@ class EditLocationScreen extends StatelessWidget {
         child: BlocConsumer<EditCompanyCubit, EditCompanyStates>(
           listener: (context, state) {
             if (state is EditCompanySuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(
-                    state.editCompanyEntity.resultEntity.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message:
+                      state.editCompanyEntity.resultEntity.message.toString(),
+                  context: context));
               navigatorAndRemove(context, Routes.mainRouteAdmin);
             } else if (state is EditCompanyErrorState) {
               if (kDebugMode) {
                 print(state.message);
               }
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {

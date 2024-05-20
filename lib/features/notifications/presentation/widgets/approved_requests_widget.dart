@@ -2,6 +2,7 @@
 
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,31 +30,16 @@ class ApprovedRequestsWidget extends StatelessWidget {
         child: BlocConsumer<RequestsBloc, RequestsStates>(
           listener: (context, state) {
             if (state is RejectRequestSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               RequestsBloc.get(context).getRequests();
             } else if (state is RejectRequestErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               RequestsBloc.get(context).getRequests();
             } else if (state is CannotOpenFileState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {

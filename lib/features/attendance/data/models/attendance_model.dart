@@ -47,7 +47,7 @@ class ResponseModel extends ResponseEntity {
   factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
         name: json['employee_id'],
         id: json['id'],
-        checkIn: json['check_in'] == false ? '' : json['check_in'],
+        checkIn: json['check_in'] == "" ? '' : json['check_in'],
         checkOut: json['check_out'].toString(),
         workedHours: json['worked_hours'],
       );

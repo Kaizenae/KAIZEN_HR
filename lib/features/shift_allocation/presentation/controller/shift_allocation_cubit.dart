@@ -17,7 +17,7 @@ class ShiftAllocationCubit extends Cubit<ShiftAllocationStates> {
       "jsonrpc": "2.0",
       "params": {
         "company_id": AppConstants.companyId,
-        "user_id": CacheHelper.get(key: AppConstants.userId),
+        "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
       }
     }).then((value) {
       shiftAllocationModel = ShiftAllocationModel.fromJson(value.data);

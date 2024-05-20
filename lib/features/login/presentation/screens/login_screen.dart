@@ -1,3 +1,4 @@
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/login/presentation/screens/create_password.dart';
 import 'package:Attendace/features/login/presentation/widgets/login_form_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,14 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
           listener: (context, state) {
             if (state is LoginSuccessState) {
               if (state.loginEntity.resultEntity.loginBefore == false) {
-                SnackBar snackBar = SnackBar(
-                  content:
-                      Text(state.loginEntity.resultEntity.message.toString()),
-                  duration: Duration(
-                    seconds: AppConstants.snackBarTime,
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                    message: state.loginEntity.resultEntity.message.toString(),
+                    context: context));
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -52,14 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             userID:
                                 state.loginEntity.resultEntity.id.toString())));
               } else {
-                SnackBar snackBar = SnackBar(
-                  content:
-                      Text(state.loginEntity.resultEntity.message.toString()),
-                  duration: Duration(
-                    seconds: AppConstants.snackBarTime,
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                    message: state.loginEntity.resultEntity.message.toString(),
+                    context: context));
                 CacheHelper.put(
                     key: AppConstants.userId,
                     value: state.loginEntity.resultEntity.id.toString());
@@ -76,13 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         : Routes.mainRoute);
               }
             } else if (state is LoginErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(),
+                context: context,
+              ));
             }
           },
           builder: (context, state) {

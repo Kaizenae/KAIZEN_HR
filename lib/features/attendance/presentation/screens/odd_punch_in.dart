@@ -138,7 +138,8 @@ class OddPunshInScreen extends StatelessWidget {
                                                           .checkIn !=
                                                       ""
                                                   ? DateFormat('hh: mm a')
-                                                      .format(DateTime.parse(
+                                                      .format(
+                                                      DateTime.parse(
                                                               AttendanceCubit.get(
                                                                       context)
                                                                   .oddPunchModel
@@ -146,8 +147,12 @@ class OddPunshInScreen extends StatelessWidget {
                                                                   .responseModel[
                                                                       index]
                                                                   .checkIn)
-                                                          .add(const Duration(
-                                                              hours: 4)))
+                                                          .add(
+                                                        const Duration(
+                                                          hours: 4,
+                                                        ),
+                                                      ),
+                                                    )
                                                   : '00: 00: 00', // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
                                               color: ColorManager.primary,
                                             ),

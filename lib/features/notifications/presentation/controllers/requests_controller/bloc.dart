@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:Attendace/core/api/end_points.dart';
@@ -34,7 +33,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
         "jsonrpc": "2.0",
         "params": {
           "company_id": AppConstants.companyId,
-          "user_id": CacheHelper.get(key: AppConstants.userId),
+          "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
         }
       },
       options: Options(
@@ -63,7 +62,6 @@ class RequestsBloc extends Cubit<RequestsStates> {
       }
       emit(RequestSuccessState());
     }).catchError((error) {
-      log(error.toString());
       emit(RequestErrorState());
     });
   }
@@ -80,7 +78,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
       data: {
         "jsonrpc": 2.0,
         "params": {
-          "user_id": CacheHelper.get(key: AppConstants.userId),
+          "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
           "request_id": requestId,
           "type": type,
           "reason": reason
@@ -106,7 +104,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
       data: {
         "jsonrpc": 2.0,
         "params": {
-          "user_id": CacheHelper.get(key: AppConstants.userId),
+          "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
           "request_id": requestId,
           "type": type,
           "reason": reason,
@@ -118,7 +116,6 @@ class RequestsBloc extends Cubit<RequestsStates> {
       emit(
           RejectRequestSuccessState(message: value.data["result"]["response"]));
     }).catchError((error) {
-      log(error.toString());
       emit(RejectRequestErrorState(
           message: AppStrings.someThingWentWrongTryAgainLater));
     });

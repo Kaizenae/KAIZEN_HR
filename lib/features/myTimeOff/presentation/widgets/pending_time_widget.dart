@@ -2,6 +2,7 @@
 
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_state.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,12 @@ class PendingTimeWidget extends StatelessWidget {
       child: BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
         listener: (context, state) {
           if (state is CancelMyRequestSuccessState) {
-            SnackBar snackBar =
-                SnackBar(content: Text(state.message.toString()));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
             BlocProvider.of<MyTimeOffCubit>(context).getMyTimeOffFun();
           } else if (state is CancelMyRequestErrorState) {
-            SnackBar snackBar =
-                SnackBar(content: Text(state.message.toString()));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
           }
         },
         builder: (context, state) {

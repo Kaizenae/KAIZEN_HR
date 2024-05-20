@@ -2,13 +2,13 @@
 
 import 'dart:async';
 import 'package:Attendace/core/utils/values_manager.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/forget_password/presentation/screens/create_new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -100,28 +100,21 @@ class _OTPScreenState extends State<OTPScreen> {
                             BlocProvider.of<ForgetPasswordCubit>(context)
                                 .otpNumber
                                 .toString()) {
-                          SnackBar snackBar = SnackBar(
-                            content: const Text(
-                              AppStrings.thisCodeIsInvalidPleaseEnterValidCode,
-                            ),
-                            duration: Duration(
-                              seconds: AppConstants.snackBarTime,
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              snackBarWidget(
+                                  message: AppStrings
+                                      .thisCodeIsInvalidPleaseEnterValidCode,
+                                  context: context));
                         }
                       } else {
                         if (pin !=
                             BlocProvider.of<ForgetPasswordCubit>(context)
                                 .otpNumber
                                 .toString()) {
-                          SnackBar snackBar = SnackBar(
-                            content: const Text(AppStrings.thisCodeIsIncorrect),
-                            duration: Duration(
-                              seconds: AppConstants.snackBarTime,
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              snackBarWidget(
+                                  message: AppStrings.thisCodeIsIncorrect,
+                                  context: context));
                         } else {
                           Navigator.push(
                             context,

@@ -3,10 +3,10 @@
 import 'dart:convert';
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
 import '../../../profile/presentation/cubit/profile_state.dart';
@@ -27,22 +27,13 @@ class HomeScreen extends StatelessWidget {
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is CheckInAndOutSuccess) {
-              SnackBar snackBar = SnackBar(
-                content: Text(
-                    state.punchInOutEntity.resultEntity.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message:
+                      state.punchInOutEntity.resultEntity.message.toString(),
+                  context: context));
             } else if (state is CheckInAndOutError) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {

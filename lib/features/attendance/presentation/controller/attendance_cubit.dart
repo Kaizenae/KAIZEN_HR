@@ -54,7 +54,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       "jsonrpc": 2.0,
       "params": {
         "company_id": AppConstants.companyId,
-        "user_id": CacheHelper.get(key: AppConstants.userId),
+        "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
       }
     }).then((value) {
       oddPunchModel = OddPunchModel.fromJson(value.data);

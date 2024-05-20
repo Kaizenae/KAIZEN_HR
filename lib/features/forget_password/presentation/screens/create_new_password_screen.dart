@@ -1,12 +1,12 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/component.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/forget_password/presentation/controller/cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -37,26 +37,16 @@ class CreateNewPasswordScreen extends StatelessWidget {
         body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  snackBarWidget(message: state.message, context: context));
 
               navigatorAndRemove(
                 context,
                 Routes.loginRoute,
               );
             } else if (state is ChangePasswordErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  snackBarWidget(message: state.message, context: context));
             }
           },
           builder: (context, state) {

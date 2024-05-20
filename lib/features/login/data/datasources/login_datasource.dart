@@ -22,7 +22,7 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
     final response = await apiConsumer.post(EndPoints.loginUrl, body: {
       "jsonrpc": "2.0",
       "params": {
-        "db": 'actan-4-staging-7489940',
+        "db": 'ICD_CMTY_TEST',
         "login": email,
         "password": password,
         "device_id": ""
