@@ -180,4 +180,5 @@ class AppStrings {
       'Please enter the reason for "Late In".';
   static const String pleaseEnterTheReasonForEarlyOut =
       'Please enter the reason for "Early Out".';
+  static const String deleteAccount = "Delete Account";
 }

@@ -2,7 +2,7 @@ import '../local/cache_helper.dart';
 import 'strings_manager.dart';
 
 class AppConstants {
-  static String appVersion = "6.0.0";
+  static String appVersion = "6.1.0";
   static int token = CacheHelper.get(key: AppStrings.token) ?? 0;
   static int companyId = CacheHelper.get(key: AppStrings.company) ?? 0;
   static bool isPunched = CacheHelper.get(key: AppStrings.punched) ?? false;

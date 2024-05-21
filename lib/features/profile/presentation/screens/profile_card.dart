@@ -212,6 +212,12 @@ class ProfileCard extends StatelessWidget {
                         name: AppStrings.termsConditions,
                         screen: '',
                       ),
+                       const Divider(),
+                      const ProfileComponent(
+                        iconName: IconsAssets.attendIcon,
+                        name: AppStrings.deleteAccount,
+                        screen: '',
+                      ),
                       const Divider(),
                       const ProfileComponent(
                         iconName: IconsAssets.messageQuestionIcon,
