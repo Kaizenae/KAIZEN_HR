@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
+import 'package:Attendace/features/login/presentation/screens/login_screen.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -13,6 +14,7 @@ import '../../../../core/widgets/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/values_manager.dart';
+import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../cubit/profile_cubit.dart';
 import '../cubit/profile_state.dart';
@@ -213,10 +215,45 @@ class ProfileCard extends StatelessWidget {
                         screen: '',
                       ),
                       const Divider(),
-                      const ProfileComponent(
-                        iconName: IconsAssets.attendIcon,
-                        name: AppStrings.deleteAccount,
-                        screen: Routes.helpRoute,
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => const AlertDialog(
+                              title: Text('Delete Account'),
+                              content: Text(
+                                  'A request will be made to delete your account and all your data'),
+                            ),
+                          );
+                          Future.delayed(const Duration(milliseconds: 1500))
+                              .then((value) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()));
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p6),
+                          child: Row(
+                            children: [
+                              const SvgPictureCustom(
+                                assetsName: IconsAssets.attendIcon,
+                                color: ColorManager.skyColor,
+                              ),
+                              const SizedBox(
+                                width: AppSize.s16,
+                              ),
+                              TextCustom(
+                                text: AppStrings.deleteAccount,
+                                fontWeight: FontWeight.w200,
+                                fontSize: FontSize.s16,
+                                color: ColorManager.primary,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       const Divider(),
                       const ProfileComponent(

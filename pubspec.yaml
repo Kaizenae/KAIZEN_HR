@@ -5,7 +5,7 @@ description: Company Attendance
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 ##############
 #important When developer update this version must be update appVersion in Constatnt Manager File
-version: 6.2.0 
+version: 6.3.0 
 ##############
 
 environment:
