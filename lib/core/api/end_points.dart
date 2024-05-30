@@ -1,8 +1,5 @@
 class EndPoints {
-  // static   String baseUrl.get(key: AppStrings.baseUrl 'http://52.91.122.186:8016';
-  static String baseUrl = 'http://178.128.101.145:8069';
-// static   String baseUrl 'http';
-
+  static String baseUrl = 'http://156.67.83.227:8070';
   static String loginUrl = '$baseUrl/login_api';
   static String registerUrl = '$baseUrl/register_api';
   static String getEmployeeUrl = '$baseUrl/get_all_employee';
