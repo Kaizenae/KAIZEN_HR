@@ -1,10 +1,12 @@
 // ignore_for_file: unused_element, unrelated_type_equality_checks
 
 import 'dart:async';
+import 'dart:io';
 import 'package:Attendace/core/utils/assets_manager.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/api/end_points.dart';
 import '../../core/utils/constants_manager.dart';
@@ -25,12 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(seconds: 4), () {
-      _nextScreen();
-
-      // navigatorAndRemove(context, Routes.localAuthRoute);
-    });
   }
 
   _getBackgroundColor() {
@@ -52,7 +48,13 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: BlocProvider(
         create: (context) => SplashBloc()..getVersion(),
-        child: BlocBuilder<SplashBloc, SplashStates>(
+        child: BlocConsumer<SplashBloc, SplashStates>(
+          listener: (context, state) {
+            if (state is GetVersionSuccessState) {
+              version = state.version;
+              _nextScreen();
+            }
+          },
           builder: (context, state) {
             version =
                 SplashBloc.get(context).versionModel.result.version.toString();
@@ -90,8 +92,14 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                if (Platform.isIOS) {
+                  await launchInBrowser(Uri.parse(
+                      "https://apps.apple.com/ae/app/idc-hr/id6478759744"));
+                } else if (Platform.isAndroid) {
+                  await launchInBrowser(Uri.parse(
+                      "https://play.google.com/store/apps/details?id=com.attendance.IDCHR"));
+                }
               },
               child: const Text(AppStrings.ok),
             )
@@ -110,6 +118,15 @@ class _SplashScreenState extends State<SplashScreen> {
                     ? Routes.mainRouteAdmin
                     : Routes.mainRoute,
       );
+    }
+  }
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
     }
   }
 }

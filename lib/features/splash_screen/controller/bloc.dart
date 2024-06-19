@@ -17,7 +17,7 @@ class SplashBloc extends Cubit<SplashStates> {
       data: {"jsonrpc": 2.0, "params": {}},
     ).then((value) {
       versionModel = VersionModel.fromJson(value.data);
-      emit(GetVersionSuccessState());
+      emit(GetVersionSuccessState(version: versionModel.result.version));
     }).catchError((error) {
       emit(GetVersionErrorState());
     });

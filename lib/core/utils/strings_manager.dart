@@ -171,7 +171,7 @@ class AppStrings {
   static const String hours = "Hours";
   static const String pleaseEnterTheReasonForLeave =
       "Please enter the reason for leave.";
-  static const String oldPassword = "Old PAssword";
+  static const String oldPassword = "Old Password";
   static const String oldPasswordFieldMustBeNotEmpty =
       "Old Password field must be not empty!";
   static const String newPasswordFieldMustBeNotEmpty =
