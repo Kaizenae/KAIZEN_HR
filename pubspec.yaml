@@ -5,7 +5,7 @@ description: Company Attendance
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 ##############
 #important When developer update this version must be update appVersion in Constatnt Manager File
-version: 6.5.0 
+version: 6.6.2 
 ##############
 
 environment:
@@ -25,7 +25,6 @@ dependencies:
   intl: ^0.19.0
   awesome_dialog: ^3.2.0
   url_launcher: ^6.2.5
-  device_information: ^0.0.4
   dartz: ^0.10.1
   get_it: ^7.6.7
   rename: ^3.0.1
@@ -42,6 +41,7 @@ dependencies:
   path_provider: ^2.1.2
   open_file: ^3.3.2
   video_player: ^2.8.2
+  win32: 5.0.2
 
 dev_dependencies:
 

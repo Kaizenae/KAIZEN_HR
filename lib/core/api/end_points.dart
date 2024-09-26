@@ -1,5 +1,8 @@
 class EndPoints {
+  // Live URL
   static String baseUrl = 'http://156.67.83.227:8070';
+  // Test URL
+  // static String baseUrl = "http://178.128.101.145:8069";
   static String loginUrl = '$baseUrl/login_api';
   static String registerUrl = '$baseUrl/register_api';
   static String getEmployeeUrl = '$baseUrl/get_all_employee';

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';

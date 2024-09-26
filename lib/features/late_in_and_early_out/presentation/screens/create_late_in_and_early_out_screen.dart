@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/widgets/elevated_button/elevated_button_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';

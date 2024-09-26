@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
@@ -79,21 +80,11 @@ class ApprovedRequestsWidget extends StatelessWidget {
                                       .attachment
                                       .isNotEmpty
                                   ? GestureDetector(
-                                      onTap: () {
-                                        RequestsBloc.get(context).convertToFile(
-                                          name: RequestsBloc.get(context)
-                                              .approvedRequests[index]
-                                              .employeeName
-                                              .replaceAll(" ", "_"),
-                                          extension: RequestsBloc.get(context)
-                                              .approvedRequests[index]
-                                              .attachmentExtension
-                                              .toString(),
-                                          base64String:
-                                              RequestsBloc.get(context)
-                                                  .approvedRequests[index]
-                                                  .attachment,
-                                        );
+                                      onTap: () async {
+                                        await launchInBrowser(Uri.parse(
+                                            RequestsBloc.get(context)
+                                                .approvedRequests[index]
+                                                .attachment));
                                       },
                                       child: const Icon(
                                         Icons.download,
@@ -329,5 +320,14 @@ class ApprovedRequestsWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }

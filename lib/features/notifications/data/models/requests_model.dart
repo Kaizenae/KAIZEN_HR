@@ -28,7 +28,6 @@ class ResponseModel {
   late String startDate;
   late String endDate;
   late String attachment;
-  late String attachmentExtension;
 
   ResponseModel();
   ResponseModel.fromJson(Map<String, dynamic> json) {
@@ -42,7 +41,6 @@ class ResponseModel {
     startDate = json["start_date"];
     ownStatus = json["own_status"];
     endDate = json["end_date"];
-    attachmentExtension = json["attachment_extension"];
     attachment = json["attachment"];
   }
 }

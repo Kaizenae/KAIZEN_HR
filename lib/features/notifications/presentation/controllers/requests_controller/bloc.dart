@@ -1,15 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/notifications/data/models/requests_model.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/requests_controller/states.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
-
 import '../../../../../core/local/cache_helper.dart';
 import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
@@ -121,25 +115,6 @@ class RequestsBloc extends Cubit<RequestsStates> {
     });
   }
 
-  Future convertToFile(
-      {required String name,
-      required String extension,
-      required String base64String}) async {
-    final appStorage = await getTemporaryDirectory();
-    final file = File("${appStorage.path}/$name.$extension");
-    try {
-      List<int> decodedBytes = base64Decode(base64String);
-      file.writeAsBytes(decodedBytes).then((File value) {
-        OpenFile.open(value.path);
-      }).catchError((error) {
-        emit(CannotOpenFileState(
-            message: "Cannot open file  ${error.toString()}"));
-      });
-    } catch (e) {
-      emit(CannotOpenFileState(message: "Cannot open file  ${e.toString()}"));
-    }
-  }
-
   bool isBottomSheetShown = false;
   TextEditingController reasonController = TextEditingController();
   void changeBottomSheet({
@@ -147,41 +122,5 @@ class RequestsBloc extends Cubit<RequestsStates> {
   }) {
     isBottomSheetShown = isShow;
     emit(AppChangeBottomSheetState());
-  }
-
-  Future openFile({
-    required String url,
-    String? fileName,
-  }) async {
-    final name = fileName ?? url.split("/").last;
-    final file = await downloadFile(
-      url,
-      name,
-    );
-    if (file == null) return;
-    OpenFile.open(file.path);
-  }
-
-  Future<File?> downloadFile(
-    String url,
-    String name,
-  ) async {
-    final appStorage = await getApplicationDocumentsDirectory();
-    final file = File("${appStorage.path}/$name");
-    try {
-      final response = await Dio().get(
-        url,
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-        ),
-      );
-      final raf = file.openSync(mode: FileMode.write);
-      raf.writeFromSync(response.data);
-      await raf.close();
-      return file;
-    } catch (error) {
-      return null;
-    }
   }
 }
